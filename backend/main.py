@@ -99,3 +99,8 @@ def recommendations(
 @app.post("/logout")
 def logout():
     return {"status": "logged out"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)
+
