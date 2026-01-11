@@ -4,11 +4,3 @@
 body {
   margin: 0;
 }
-#root {
-  transform: scale(2.5);
-  transform-origin: top left;
-}
-
-html {
-  zoom: 2.5;
-}
