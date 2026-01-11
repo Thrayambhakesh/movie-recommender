@@ -111,11 +111,18 @@ def recommend(user_id, top_n):
     # COLD START → POPULARITY FALLBACK
     # ---------------------------------
     if np.linalg.norm(user_vec) == 0:
-        return (
-            movies[~movies["tmdb_id"].isin(swiped_ids)]
-            .sort_values("avg_rating", ascending=False)
-            .head(top_n)
-        )
+        fallback = (
+        movies[~movies["tmdb_id"].isin(swiped_ids)]
+        .sort_values("avg_rating", ascending=False)
+        .head(top_n)
+        .copy()
+    )
+
+        fallback["image_url"] = fallback["tmdb_id"].apply(get_movie_image)
+
+        mark_as_recommended(user_id, fallback["tmdb_id"].tolist())
+        return fallback
+
 
     # ---------------------------------
     # COMPUTE SIMILARITIES
@@ -183,6 +190,7 @@ def recommend(user_id, top_n):
             movies[~movies["tmdb_id"].isin(swiped_ids)]
             .sort_values("avg_rating", ascending=False)
             .head(top_n)
+            
         )
 
         # Mark fallback recommendations as seen
