@@ -6,6 +6,10 @@
   transform-origin: top left;
 }
 
+html {
+  zoom: 2.5;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
