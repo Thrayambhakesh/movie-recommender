@@ -8,10 +8,16 @@ import numpy as np
 import pandas as pd
 from database import users_collection
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+EMB_PATH = os.path.join(BASE_DIR, "hybrid_item_embeddings.pkl")
+MOVIE_PATH = os.path.join(BASE_DIR, "movie_metadata.csv")
+
+
 # ---------------------------------
 # LOAD EMBEDDINGS & METADATA
 # ---------------------------------
-with open("hybrid_item_embeddings.pkl", "rb") as f:
+with open(EMB_PATH, "rb") as f:
     ITEM_EMB = pickle.load(f)
 
 load_dotenv()
@@ -60,7 +66,7 @@ for k in ITEM_EMB:
         ITEM_EMB[k] = ITEM_EMB[k] / norm
 
 # SERVING FILE (post-training)
-movies = pd.read_csv("movie_metadata.csv")
+movies = pd.read_csv(MOVIE_PATH)
 movies["tmdb_id"] = movies["tmdb_id"].astype(int)
 
 # Embedding dimension
