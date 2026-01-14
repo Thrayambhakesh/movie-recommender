@@ -18,13 +18,13 @@ Thumbs.db
 
 *.log
 
-*.pkl
+
 *.joblib
 *.h5
 *.pt
 
-*.csv
-data/
+
+
 datasets/
 
 .ipynb_checkpoints/
