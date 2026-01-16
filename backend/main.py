@@ -100,6 +100,14 @@ def recommendations(
 def logout():
     return {"status": "logged out"}
 
+@app.get("/")
+def root():
+    return {
+        "status": "ok",
+        "message": "Movie Recommender API is running 🚀"
+    }
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000)
